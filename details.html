@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h4>Submitted Data</h4>
+        <div id="details"></div>
+    </div>
+
+    <script>
+        function getParameterByName(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var url = window.location.href;
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            var results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        window.onload = function() {
+            var firstName = getParameterByName('FN');
+            var lastName = getParameterByName('LN');
+            var email = getParameterByName('email');
+            var dob = getParameterByName('dob');
+            var gender = getParameterByName('gender');
+
+            var detailsDiv = document.getElementById('details');
+            detailsDiv.innerHTML = `
+                <p><strong>First Name:</strong> ${firstName}</p>
+                <p><strong>Last Name:</strong> ${lastName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>DOB:</strong> ${dob}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
